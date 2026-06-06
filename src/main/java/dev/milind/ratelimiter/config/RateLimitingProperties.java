@@ -21,10 +21,14 @@ public class RateLimitingProperties {
     }
 
     public static class Plan{
+        private String algorithm;
         private int capacity;
         private int refillRate;
         private long refillPeriod;
         private TimeUnit timeUnit;
+
+        public String getAlgorithm() { return algorithm; }
+        public void setAlgorithm(String algorithm) { this.algorithm = algorithm; }
 
         public int getCapacity() { return capacity; }
         public void setCapacity(int capacity) { this.capacity = capacity; }

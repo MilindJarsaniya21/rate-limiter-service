@@ -24,12 +24,13 @@ management:
 rate-limiting:
   plans:
     free:
+      algorithm: TOKEN_BUCKET_REDIS
       capacity: 10
       refill-rate: 10
       refill-period: 1
       time-unit: MINUTES
     premium:
-      capacity: 100
-      refill-rate: 100
-      refill-period: 1
-      time-unit: SECONDS
+      algorithm: SLIDING_WINDOW_REDIS
+      capacity: 10
+      refill-period: 1 # This is window size
+      time-unit: MINUTES
