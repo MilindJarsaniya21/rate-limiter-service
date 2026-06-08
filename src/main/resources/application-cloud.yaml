@@ -1,6 +1,0 @@
-spring:
-  data:
-    redis:
-      host: day-enormous-spontaneous-88990.db.redis.io
-      port: 17479
-      password: oYMFe0X0PIuYQpvWtY3iSjJAnBe73WC4
