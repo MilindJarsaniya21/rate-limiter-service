@@ -163,4 +163,3 @@ The default configuration is set up to connect to a local Redis instance.
 
 -   `GET /api/v1/premium-data`: Protected by the `premium` (Sliding Window) plan.
 -   `GET /api/v1/free-data`: Protected by the `free` (Token Bucket) plan.
-```
