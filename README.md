@@ -25,6 +25,7 @@ A production-grade, distributed rate limiting service built with Spring Boot and
 Usually the Rate Limiter service is designed to function as an API Gateway, sitting in front of backend microservices. It intercepts all incoming requests, applies the appropriate rate limit, and either proxies the request to the upstream service or rejects it with an `HTTP 429 Too Many Requests` status.
 
 ![High-Level Architecture](.github/assets/RateLimiterHLD.png)
+
 *Figure 1: API Gateway implementation architecture.*
 
 ### Internal Design (Strategy Pattern)
@@ -37,6 +38,7 @@ Internally, the service uses the Strategy Pattern to dynamically select the corr
 4.  The Aspect invokes `isAllowed()` on the returned implementation.
 
 ![Internal Design](.github/assets/RateLimiterCurrentHLD.png)
+
 *Figure 2: Current implementation architecture.*
 
 ---
@@ -53,7 +55,8 @@ This project demonstrates a deep understanding of the trade-offs between differe
     -   This provides perfect accuracy over a rolling window but has a higher memory footprint (O(N), where N is the number of requests in the window).
 -   **Atomicity**: Achieved by executing `ZREMRANGEBYSCORE`, `ZCARD`, and `ZADD` within a single, atomic Redis transaction to prevent race conditions.
     ![Sliding Window](.github/assets/SlidingWindow.png)
-    *Figure 2: Sliding Window Algorithm.*
+
+    *Figure 3: Sliding Window Algorithm.*
 
 ### 2. Token Bucket (High Performance)
 
@@ -62,7 +65,8 @@ This project demonstrates a deep understanding of the trade-offs between differe
     -   Only two fields are stored per user: `tokens` and `last_refill_timestamp`. This is extremely memory-efficient (O(1)).
 -   **Atomicity**: The entire get-refill-consume logic is encapsulated in a **Redis Lua Script**. Redis guarantees that the entire script is executed atomically, making it impossible for concurrent requests to corrupt the bucket's state.
     ![Token_Bucket](.github/assets/TokenBucket.png)
-    *Figure 2: Token Bucket Algorithm.*
+
+    *Figure 4: Token Bucket Algorithm.*
 ---
 
 ## Technology Stack
