@@ -1,0 +1,6 @@
+spring:
+  data:
+    redis:
+      host: your-redis-host-here
+      port: your-redis-host-port-here
+      password: your-password-here
