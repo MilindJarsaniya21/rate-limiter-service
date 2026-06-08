@@ -31,6 +31,6 @@ rate-limiting:
       time-unit: MINUTES
     premium:
       algorithm: SLIDING_WINDOW_REDIS
-      capacity: 10
+      capacity: 20
       refill-period: 1 # This is window size
       time-unit: MINUTES

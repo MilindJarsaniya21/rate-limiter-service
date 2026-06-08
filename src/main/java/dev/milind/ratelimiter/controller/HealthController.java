@@ -26,15 +26,15 @@ public class HealthController {
         return "Redis OK + value = " + redisTemplate.opsForValue().get(key);
     }
 
-    @GetMapping("/api/v1/health")
-    @RateLimited(plan = "free") // This enforces 10 requests per minute based on application.yaml
-    public String checkHealth() {
-        return "Service is up and running!";
+    @GetMapping("/api/v1/free-data")
+    @RateLimited(plan = "free")
+    public String getFreeData() {
+        return "Here is your free health data.";
     }
 
     @GetMapping("/api/v1/premium-data")
-    @RateLimited(plan = "premium") // This allows 100 requests per second
+    @RateLimited(plan = "premium")
     public String getPremiumData() {
-        return "Here is your premium data.";
+        return "Here is your premium health data.";
     }
 }
