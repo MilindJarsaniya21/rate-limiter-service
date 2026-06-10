@@ -66,8 +66,8 @@ public class RedisTokenBucketRateLimiter implements RateLimiter {
     }
 
     @Override
-    public boolean isAllowed(String clintId) {
-        String key = "rate_limit:token_bucket:" + clintId;
+    public boolean isAllowed(String clientId) {
+        String key = "rate_limit:token_bucket:" + clientId;
 
         long now = System.currentTimeMillis();
 

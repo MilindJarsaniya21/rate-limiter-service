@@ -2,7 +2,7 @@
 
 [![Java](https://img.shields.io/badge/Java-17-blue.svg)](https://www.java.com)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.5-brightgreen.svg)](https://spring.io/projects/spring-boot)
-[![Redis](https://img.shields.io/badge/Redis-7.x-red.svg)](https://redis.io)
+[![Redis](https://img.shields.io/badge/Redis-7+-red.svg)](https://redis.io)
 [![Test Coverage](https://img.shields.io/badge/Tests-Passing-brightgreen.svg)]()
 
 A production-grade, distributed rate limiting service built with Spring Boot and Redis. This project provides a configurable, high-performance solution for protecting APIs from overuse and ensuring fair usage, designed to be deployed as a standalone API Gateway or integrated as a library.
@@ -127,6 +127,7 @@ The project includes a production-grade integration test suite (`RateLimiterComp
 -   Java 17+
 -   Maven 3.6+
 -   Docker
+-   Redis 7+
 
 ### 1. Running with Local Redis (Docker)
 
