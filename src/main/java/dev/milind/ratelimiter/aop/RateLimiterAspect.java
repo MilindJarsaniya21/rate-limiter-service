@@ -27,24 +27,24 @@ public class RateLimiterAspect {
 
     @Around("@annotation(rateLimited)")
     public Object enforceRateLimit(ProceedingJoinPoint joinPoint, RateLimited rateLimited) throws Throwable {
-        logger.info("--- AOP: Rate limiting aspect triggered for method: {} ---", joinPoint.getSignature().toShortString());
+        logger.debug("--- AOP: Rate limiting aspect triggered for method: {} ---", joinPoint.getSignature().toShortString());
 
         String planName = rateLimited.plan();
         RateLimiter rateLimiter = rateLimiterFactory.getRateLimiter(planName);
-        logger.info("Using plan: '{}'", planName);
+        logger.debug("Using plan: '{}'", planName);
 
         String clientId = getClientId();
-        logger.info("Client ID: '{}'", clientId);
+        logger.debug("Client ID: '{}'", clientId);
 
         boolean allowed = rateLimiter.isAllowed(clientId);
-        logger.info("Is request allowed? {}", allowed);
+        logger.debug("Is request allowed? {}", allowed);
 
         if (!allowed) {
             logger.warn("Rate limit EXCEEDED for client '{}' on plan '{}'", clientId, planName);
             throw new RateLimitExceededException("Rate limit exceeded. Try again later.");
         }
 
-        logger.info("--- AOP: Request allowed, proceeding with method execution. ---");
+        logger.debug("--- AOP: Request allowed, proceeding with method execution. ---");
         return joinPoint.proceed();
     }
 
@@ -59,6 +59,7 @@ public class RateLimiterAspect {
             return ip;
         }
         // This is a fallback and should not happen in a web context
+        logger.error("No request context found — falling back to 'unknown-client'");
         return "unknown-client";
     }
 }
